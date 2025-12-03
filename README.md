@@ -72,3 +72,95 @@ jq "{ "docs": .items }" "clash_royale_cards_1.json" | curl -X POST "http://admin
 
 que como resultado muestra ok si se creo de forma exitosa algun documento
 <img width="1457" height="127" alt="image" src="https://github.com/user-attachments/assets/3c7698ae-fde8-4d43-8c09-f02d003d0d3b" />
+
+# Operaciones CRUD de CouchDB
+
+Como estamos manejando nuestra base de datos con fauxtoneste realiza las siguientes operaciones a través de la API REST usando solicitudes HTTP.
+
+### 1. Crear
+
+CouchDB asigna el `_id` y el `_rev` automaticamente, fauxton seleccionamos "Create Documents" y llenamos el texto JSON del documento que deseemos agregar luego fauxton procesa la solicitud HTTP de la siguiente forma, el metodo de hacerlo desde HTTP es con **POST**
+
+| # | Método | Endpoint de la API | Cuerpo de la Solicitud (JSON) |
+| :--- | :--- | :--- | :--- |
+| 1 | `POST` | `/clash_royale_cards` | `{"name": "Electro Wizard", "elixirCost": 4, "rarity": "legendary"}` |
+| 2 | `POST` | `/clash_royale_cards` | `{"name": "Heal Spirit", "elixirCost": 1, "type": "spell"}` |
+| 3 | `POST` | `/clash_royale_cards` | `{"name": "Tesla", "elixirCost": 4, "type": "building", "hitpoints": 1200}` |
+| 4 | `POST` | `/clash_royale_cards` | `{"name": "P.E.K.K.A", "elixirCost": 7, "rarity": "epic"}` |
+| 5 | `POST` | `/clash_royale_cards` | `{"name": "New Card 5", "elixirCost": 8, "rarity": "champion"}` |
+
+## Ejemplo: 
+
+<img width="621" height="115" alt="image" src="https://github.com/user-attachments/assets/f6369aee-dc9e-40c2-9531-b8f66b9baad8" />
+
+## Resultado:
+
+<img width="448" height="222" alt="image" src="https://github.com/user-attachments/assets/6c5f54fa-b6a2-4b5d-9951-ad19d6ad05fa" />
+
+### 2. Leer
+
+Los siguientes ejemplos que mostramos son de vistas creadas desde fauxton, para crear una hay que seleccionar el simbolo de mas al lado de Design Documents y seleccionar New view, el metodo de hacerlo desde HTTP es con **GET**
+
+| # | Método | Endpoint de la API | Propósito de la Consulta |
+| :--- | :--- | :--- | :--- |
+| 1 | `GET` | `.../_design/cards/_view/by_type?key="troop"` | Recuperar todas las cartas de tipo "troop". |
+| 2 | `GET` | `.../_design/cards/_view/by_usage_and_attack?startkey=["splash", 5.0]` | Recuperar todas las cartas de "splash" con un uso superior al 5.0%. |
+| 3 | `GET` | `/_all_docs?limit=5` | Leer los primeros 5 documentos de la base de datos. |
+| 4 | `GET` | `.../by_rarity_and_cost` | Leer la vista completa por rareza y costo. |
+| 5 | `GET` | `.../by_rarity_and_cost?key=["rare", 4]` | Leer cartas de rareza "rare" con costo exacto de 4. |
+
+## 1. Recuperar todas las cartas de tipo "troop".
+
+<img width="369" height="134" alt="image" src="https://github.com/user-attachments/assets/d01e8324-2d5f-4880-a92e-28b5b7d305c4" />
+<img width="auto" height="134" alt="image" src="https://github.com/user-attachments/assets/8ae4d670-5dbf-4cf0-b448-f7bb4eadeb95" />
+
+## 2.Recuperar todas las cartas de "splash" con un uso superior al 5.0%.
+
+<img width="auto" height="134" alt="image" src="https://github.com/user-attachments/assets/9f2c76c3-ef92-41fe-a2e2-9ac0eab02d5e" />
+<img width="auto" height="134" alt="image" src="https://github.com/user-attachments/assets/b982c07e-9f89-4aaa-b199-c2080f2b5475" />
+
+## 3.Leer los primeros 5 documentos de la base de datos.
+En fauxton dentro de la funcion de la vista no podemos limitar nuestros resultados pero podemos seleccionar la opción  en el menu options para que use los limite al hacer la solicitud HTTP
+
+<img width="" height="134" alt="image" src="https://github.com/user-attachments/assets/6432ff7d-2910-4154-b41e-f958259441a2" />
+<img width="" height="300" alt="image" src="https://github.com/user-attachments/assets/d87a82f2-c091-4dd5-8bd0-2afa2a3fd6eb" />
+<img width="1082" height="320" alt="image" src="https://github.com/user-attachments/assets/d3cb5f1d-05ae-46ba-8ffd-78eae31ce82d" />
+
+## 4.Leer la vista completa por rareza y costo.
+
+<img width="" height="134" alt="image" src="https://github.com/user-attachments/assets/e24f249b-3612-4490-b7a6-40333519eff1" />
+<img width="" height="134" alt="image" src="https://github.com/user-attachments/assets/ef8d1031-3c04-4bc5-b93f-140d39957387" />
+
+
+
+
+
+
+
+
+
+
+
+### 3. Actualizar
+
+Se utiliza el método `PUT` en el endpoint del documento. Debe incluirse el `_rev` actual.
+
+| # | Método | Endpoint de la API | Descripción del Cambio (JSON parcial) |
+| :--- | :--- | :--- | :--- |
+| 1 | `PUT` | `/clash_royale_cards/26000057` | Cambiar el costo de elixir a 3. (`... "elixirCost": 3, ...}`) |
+| 2 | `PUT` | `/clash_royale_cards/26000057` | Ajustar puntos de vida a 700. (`... "hitpoints": 700, ...}`) |
+| 3 | `PUT` | `/clash_royale_cards/26000057` | Agregar campo `is_evolved: true`. |
+| 4 | `PUT` | `/clash_royale_cards/26000057` | Cambiar la rareza a "epic". (`... "rarity": "epic", ...}`) |
+| 5 | `PUT` | `/clash_royale_cards/26000057` | Actualizar URL del icono. (`... "iconUrls": {... nueva URL ...}, ...}`) |
+
+### 4. Eliminar
+
+Se utiliza el método `DELETE` en el endpoint del documento. Debe incluirse el `_rev` como parámetro de consulta.
+
+| # | Método | Endpoint de la API | Notas |
+| :--- | :--- | :--- | :--- |
+| 1 | `DELETE` | `/clash_royale_cards/26000057?rev=1-cf490f23...` | Eliminar el documento de la Máquina Voladora. |
+| 2 | `DELETE` | `/clash_royale_cards/26000010?rev=5-abcdef12...` | Eliminar una carta antigua (ID ficticio). |
+| 3 | `DELETE` | `/clash_royale_cards/TEMP_CARD_001?rev=1-z9y8x7...` | Eliminar un documento creado temporalmente. |
+| 4 | `DELETE` | `/clash_royale_cards/28000005?rev=2-a1b2c3d4...` | Eliminar un hechizo. |
+| 5 | `DELETE` | `/clash_royale_cards/P.E.K.K.A_ID?rev=1-revpack...` | Eliminar el documento P.E.K.K.A (asumiendo que fue creado). |
