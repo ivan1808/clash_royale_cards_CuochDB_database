@@ -1,0 +1,1 @@
+# clash_royale_cards_CuochDB_database
