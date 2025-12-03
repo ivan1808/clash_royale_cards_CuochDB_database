@@ -6,7 +6,24 @@ El dataset que escojimos clash_royale_cards_1.json contiene información complet
 Ejemplo de uno de los objetos JSON
 <img width="1305" height="382" alt="image" src="https://github.com/user-attachments/assets/9ad7e0ee-b0d1-4f35-a0dc-1e056113d28a" />
 
+# Diccionario de Datos
 
+| Campo | Tipo de Dato | Descripción | Valores de Ejemplo |
+| :--- | :--- | :--- | :--- |
+| `name` | String | Nombre de la carta. | `"Knight"`, `"Archers"`, `"Void"` |
+| `id` | Number | Identificador único de la carta. | `26000000`, `28000023` |
+| `elixirCost` | Number | Costo de elixir para usar la carta. | `3`, `5`, `1` |
+| `rarity` | String | Rareza de la carta. | `"common"`, `"epic"`, `"rare"` |
+| `type` | String | Tipo de carta (Tropa, Hechizo o Edificio). | `"troop"`, `"spell"`, `"building"` |
+| `iconUrls` | Object | Objeto que contiene las URLs de las imágenes. | `{ "medium": "..." }` |
+| `mobility` | String | Si la tropa se mueve por tierra, aire o no se aplica. | `"ground"`, `"air"`, `"both"` |
+| `targets` | String | A qué tipo de unidades puede atacar la carta. | `"ground"`, `"air"`, `"both"` |
+| `attack_type` | String | Tipo de ataque individual o en area. | `"single"`, `"splash"` |
+| `hitpoints` | Number/Null | Puntos de vida base de la carta (o `null` si es hechizo). | `1766`, `787`, `null` |
+| `usage` | Number | Porcentaje de uso o popularidad de la carta. | `8.88`, `4.0`, `0.8` |
+| `hp_level` | String/Null | Nivel de puntos de vida. | `"medium"`, `null` |
+| `groupCard` | Boolean | Indica si es una carta de grup. | `true`, `false` |
+| `maxEvolutionLevel` | Number/Null | Nivel máximo de evolución de la carta. | `1`, `0`, `null` |
 
 # Proceso de Importación de Datos
 El proceso de importación implicó los siguientes pasos:
