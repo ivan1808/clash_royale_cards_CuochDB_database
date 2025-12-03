@@ -25,6 +25,37 @@ Ejemplo de uno de los objetos JSON
 | `groupCard` | Boolean | Indica si es una carta de grup. | `true`, `false` |
 | `maxEvolutionLevel` | Number/Null | Nivel máximo de evolución de la carta. | `1`, `0`, `null` |
 
+# Base de datos usada
+
+El dataset de cartas de Clash Royale se adapta al modelo de **Base de Datos de Documentos**, que es el modelo central utilizado por **CouchDB**.
+
+### 1. Características del Modelo
+
+| Característica | Base de Datos de Documentos | Aplicación al Dataset |
+| :--- | :--- | :--- |
+| **Formato** | Utiliza JSON | El dataset ya está en formato **JSON**, el formato nativo para CouchDB. |
+| **Atomicidad/Independencia** | **Documentos Auto-contenidos.** | Cada carta (`"Knight"`, `"Archers"`) es un documento independiente que contiene **toda** su información. |
+| **Flexibilidad del Esquema** | **Schema-less (esquema flexible).** | No todas las cartas necesitan los mismos campos (ej. los hechizos no tienen `hitpoints`), lo cual es manejado naturalmente por el modelo de documentos. |
+
+### 2. Estructura y Modelado
+
+| Elemento NoSQL | Descripción en el Modelo |
+| :--- | :--- |
+| Base de Datos | `clash_royale_cards` (Contenedor de todos los documentos). |
+| Documentos | Las 120 cartas (tropas, edificios y hechizos) son los documentos individuales. |
+| Relaciones | Las relaciones son implícitas y se muestran atraves de los valores de los campos. |
+| Diseño | Denormalización completa. Todos los datos de una carta están integrados en un solo documento para optimizar la velocidad de lectura|
+
+# Herramientas Utilizadas
+
+Se utilizaron las siguientes herramientas de línea de comandos y la interfaz web para preparar el dataset, realizar la ingesta y gestionar la base de datos CouchDB:
+
+| Herramienta | Tipo | Propósito y Uso |
+| :--- | :--- | :--- |
+| jq | Procesador JSON de Línea de Comandos | Se utilizó para modificar el archivo JSON de origen (`clash_royale_cards_1.json`), transformando el array principal de `{"items": [...]}` al formato requerido por CouchDB: `{"docs": [...]}`. |
+| cURL | Cliente de Transferencia de Datos | Herramienta esencial para interactuar con la API REST de CouchDB. Se utilizó para realizar la solicitud POST al endpoint `/_bulk_docs`, enviando el dataset transformado para la carga de documentos. |
+| Fauxton | Interfaz Web de CouchDB | Se utilizó como herramienta gráfica para crear la base de datos (`clash_royale_cards`) y para la creación y gestión de las Vistas MapReduce (Documentos de Diseño), permitiendo la consulta avanzada de los datos. |
+
 # Proceso de Importación de Datos
 El proceso de importación implicó los siguientes pasos:
 
