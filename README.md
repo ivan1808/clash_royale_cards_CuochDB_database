@@ -138,7 +138,7 @@ En fauxton dentro de la funcion de la vista no podemos limitar nuestros resultad
 
 ## 3. Actualizar
 
-Se utiliza el método `PUT` en el endpoint del documento. Debe incluirse el `_rev` actual.
+Los siguientes ejemplos que mostramos son de actualizaciones desde fauxton, para actualizar un documento se selecciona el documento que quieres cambiar, se te abrira el documento con sus elementos y su `_rev` generada esta no debe de ser modificada, realizas los cambios nesesarios y lo guardas de ahi fauxton realiza la solicitud HTTP que es con `PUT` e incluye el `_rev` actual.
 
 | # | Método | Endpoint de la API | Descripción del Cambio (JSON parcial) |
 | :--- | :--- | :--- | :--- |
@@ -148,9 +148,18 @@ Se utiliza el método `PUT` en el endpoint del documento. Debe incluirse el `_re
 | 4 | `PUT` | `/clash_royale_cards/26000057` | Cambiar la rareza a "epic". (`... "rarity": "epic", ...}`) |
 | 5 | `PUT` | `/clash_royale_cards/26000057` | Actualizar URL del icono. (`... "iconUrls": {... nueva URL ...}, ...}`) |
 
+### Ejemplo cambiando los hitpoints a 700
+
+<img width="1152" height="583" alt="image" src="https://github.com/user-attachments/assets/e4e6fe0d-68ea-40ff-9051-3cab730efd69" />
+<img width="1137" height="585" alt="image" src="https://github.com/user-attachments/assets/ef4b5f1c-b01a-47b1-94cc-998652c820c2" />
+
+### Resultado una nueva version del documento
+
+<img width="1139" height="578" alt="image" src="https://github.com/user-attachments/assets/c3574ad0-5b54-487c-841e-c584c5eda952" />
+
 ## 4. Eliminar
 
-Se utiliza el método `DELETE` en el endpoint del documento. Debe incluirse el `_rev` como parámetro de consulta.
+Los siguientes ejemplos que mostramos son de eliminaciones se hicieron desde fauxton, para borrar un documento simplemente se debe de entrar a un documento y seleccionar la opción Delete y seleccionar que estas seguro ahi fauxton realiza la solicitud HTTP `DELETE` que incluye el `_rev` como parámetro de consulta.
 
 | # | Método | Endpoint de la API | Notas |
 | :--- | :--- | :--- | :--- |
@@ -159,3 +168,12 @@ Se utiliza el método `DELETE` en el endpoint del documento. Debe incluirse el `
 | 3 | `DELETE` | `/clash_royale_cards/TEMP_CARD_001?rev=1-z9y8x7...` | Eliminar un documento creado temporalmente. |
 | 4 | `DELETE` | `/clash_royale_cards/28000005?rev=2-a1b2c3d4...` | Eliminar un hechizo. |
 | 5 | `DELETE` | `/clash_royale_cards/P.E.K.K.A_ID?rev=1-revpack...` | Eliminar el documento P.E.K.K.A (asumiendo que fue creado). |
+
+### Ejemplo borrar carta agregada 'Electro Wizard'
+
+<img width="1769" height="269" alt="image" src="https://github.com/user-attachments/assets/de496dc8-8ce1-409e-ba41-c8b2c752bb22" />
+
+### Resultado
+
+<img width="483" height="146" alt="image" src="https://github.com/user-attachments/assets/766025fd-67f3-4a89-8327-4f501494eff0" />
+
