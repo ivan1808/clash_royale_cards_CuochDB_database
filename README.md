@@ -77,7 +77,7 @@ que como resultado muestra ok si se creo de forma exitosa algun documento
 
 Como estamos manejando nuestra base de datos con fauxtoneste realiza las siguientes operaciones a través de la API REST usando solicitudes HTTP.
 
-### 1. Crear
+## 1. Crear
 
 CouchDB asigna el `_id` y el `_rev` automaticamente, fauxton seleccionamos "Create Documents" y llenamos el texto JSON del documento que deseemos agregar luego fauxton procesa la solicitud HTTP de la siguiente forma, el metodo de hacerlo desde HTTP es con **POST**
 
@@ -97,7 +97,7 @@ CouchDB asigna el `_id` y el `_rev` automaticamente, fauxton seleccionamos "Crea
 
 <img width="448" height="222" alt="image" src="https://github.com/user-attachments/assets/6c5f54fa-b6a2-4b5d-9951-ad19d6ad05fa" />
 
-### 2. Leer
+## 2. Leer
 
 Los siguientes ejemplos que mostramos son de vistas creadas desde fauxton, para crear una hay que seleccionar el simbolo de mas al lado de Design Documents y seleccionar New view, el metodo de hacerlo desde HTTP es con **GET**
 
@@ -109,39 +109,34 @@ Los siguientes ejemplos que mostramos son de vistas creadas desde fauxton, para 
 | 4 | `GET` | `.../by_rarity_and_cost` | Leer la vista completa por rareza y costo. |
 | 5 | `GET` | `.../by_rarity_and_cost?key=["rare", 4]` | Leer cartas de rareza "rare" con costo exacto de 4. |
 
-## 1. Recuperar todas las cartas de tipo "troop".
+### 1. Recuperar todas las cartas de tipo "troop".
 
 <img width="369" height="134" alt="image" src="https://github.com/user-attachments/assets/d01e8324-2d5f-4880-a92e-28b5b7d305c4" />
 <img width="auto" height="134" alt="image" src="https://github.com/user-attachments/assets/8ae4d670-5dbf-4cf0-b448-f7bb4eadeb95" />
 
-## 2.Recuperar todas las cartas de "splash" con un uso superior al 5.0%.
+### 2.Recuperar todas las cartas de "splash" con un uso superior al 5.0%.
 
 <img width="auto" height="134" alt="image" src="https://github.com/user-attachments/assets/9f2c76c3-ef92-41fe-a2e2-9ac0eab02d5e" />
 <img width="auto" height="134" alt="image" src="https://github.com/user-attachments/assets/b982c07e-9f89-4aaa-b199-c2080f2b5475" />
 
-## 3.Leer los primeros 5 documentos de la base de datos.
+### 3.Leer los primeros 5 documentos de la base de datos.
 En fauxton dentro de la funcion de la vista no podemos limitar nuestros resultados pero podemos seleccionar la opción  en el menu options para que use los limite al hacer la solicitud HTTP
 
 <img width="" height="134" alt="image" src="https://github.com/user-attachments/assets/6432ff7d-2910-4154-b41e-f958259441a2" />
 <img width="" height="300" alt="image" src="https://github.com/user-attachments/assets/d87a82f2-c091-4dd5-8bd0-2afa2a3fd6eb" />
 <img width="1082" height="320" alt="image" src="https://github.com/user-attachments/assets/d3cb5f1d-05ae-46ba-8ffd-78eae31ce82d" />
 
-## 4.Leer la vista completa por rareza y costo.
+### 4.Leer la vista completa por rareza y costo.
 
 <img width="" height="134" alt="image" src="https://github.com/user-attachments/assets/e24f249b-3612-4490-b7a6-40333519eff1" />
-<img width="" height="134" alt="image" src="https://github.com/user-attachments/assets/ef8d1031-3c04-4bc5-b93f-140d39957387" />
+<img width="" height="200" alt="image" src="https://github.com/user-attachments/assets/ef8d1031-3c04-4bc5-b93f-140d39957387" />
 
+### 5.Leer cartas de rareza "rare" con costo exacto de 4.
 
+<img width="350" height="136" alt="image" src="https://github.com/user-attachments/assets/4acc02fc-846e-434f-a82b-fed5f66e5eb1" />
+<img width="600" height="134" alt="image" src="https://github.com/user-attachments/assets/583e7049-977f-4056-9806-3f30fee57696" />
 
-
-
-
-
-
-
-
-
-### 3. Actualizar
+## 3. Actualizar
 
 Se utiliza el método `PUT` en el endpoint del documento. Debe incluirse el `_rev` actual.
 
@@ -153,7 +148,7 @@ Se utiliza el método `PUT` en el endpoint del documento. Debe incluirse el `_re
 | 4 | `PUT` | `/clash_royale_cards/26000057` | Cambiar la rareza a "epic". (`... "rarity": "epic", ...}`) |
 | 5 | `PUT` | `/clash_royale_cards/26000057` | Actualizar URL del icono. (`... "iconUrls": {... nueva URL ...}, ...}`) |
 
-### 4. Eliminar
+## 4. Eliminar
 
 Se utiliza el método `DELETE` en el endpoint del documento. Debe incluirse el `_rev` como parámetro de consulta.
 
