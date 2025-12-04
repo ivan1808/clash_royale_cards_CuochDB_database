@@ -1,5 +1,32 @@
-# Clash_royale_cards_CuochDB_database
+<h1 align="center"> Clash_royale_cards_CuochDB_database </h1>
+<h2 align="center"> Modelado de datos </h2>
+<h2 align="left"> Equipo 02:</h2>
+<h2 align="center"> Andres Miguel Ayora Suaste</h2>
+<h2 align="center"> Isaias Peniche Cruz</h2>
+<h2 align="center"> Ivan Augusto Perez Saldivar</h2> <br />
 
+
+# Índice del Repositorio
+
+## **1. Dataset Usado**
+
+## **2. Diccionario de Datos**
+
+## **3. Base de Datos Usada**
+
+## **4. Herramientas Utilizadas**
+
+## **5. Proceso de Importación de Datos**
+
+## **6. Operaciones CRUD de CouchDB**
+* ### **1. Crear (POST)**
+* ### **2. Leer (GET)**
+* ### **3. Actualizar (PUT)**
+* ### **4. Eliminar (DELETE)**
+
+## **7. Referencias**
+
+<br />
 # Dataset usado
 El dataset que escojimos clash_royale_cards_1.json contiene información completa sobre las cartas del juego Clash Royale, incluyendo unidades (troops), edificios (buildings) y hechizos (spells). Consiste en una colección de objetos JSON que representan cada carta del juego con sus atributos principales como costo de elixir, rareza, tipo, estadísticas de combate y datos de uso.
 
@@ -24,7 +51,7 @@ Ejemplo de uno de los objetos JSON
 | `hp_level` | String/Null | Nivel de puntos de vida. | `"medium"`, `null` |
 | `groupCard` | Boolean | Indica si es una carta de grup. | `true`, `false` |
 | `maxEvolutionLevel` | Number/Null | Nivel máximo de evolución de la carta. | `1`, `0`, `null` |
-
+<br />
 # Base de datos usada
 
 El dataset de cartas de Clash Royale se adapta al modelo de **Base de Datos de Documentos**, que es el modelo central utilizado por **CouchDB**.
@@ -45,7 +72,7 @@ El dataset de cartas de Clash Royale se adapta al modelo de **Base de Datos de D
 | Documentos | Las 120 cartas (tropas, edificios y hechizos) son los documentos individuales. |
 | Relaciones | Las relaciones son implícitas y se muestran atraves de los valores de los campos. |
 | Diseño | Denormalización completa. Todos los datos de una carta están integrados en un solo documento para optimizar la velocidad de lectura|
-
+<br />
 # Herramientas Utilizadas
 
 Se utilizaron las siguientes herramientas de línea de comandos y la interfaz web para preparar el dataset, realizar la ingesta y gestionar la base de datos CouchDB:
@@ -55,7 +82,7 @@ Se utilizaron las siguientes herramientas de línea de comandos y la interfaz we
 | jq | Procesador JSON de Línea de Comandos | Se utilizó para modificar el archivo JSON de origen (`clash_royale_cards_1.json`), transformando el array principal de `{"items": [...]}` al formato requerido por CouchDB: `{"docs": [...]}`. |
 | cURL | Cliente de Transferencia de Datos | Herramienta esencial para interactuar con la API REST de CouchDB. Se utilizó para realizar la solicitud POST al endpoint `/_bulk_docs`, enviando el dataset transformado para la carga de documentos. |
 | Fauxton | Interfaz Web de CouchDB | Se utilizó como herramienta gráfica para crear la base de datos (`clash_royale_cards`) y para la creación y gestión de las Vistas MapReduce (Documentos de Diseño), permitiendo la consulta avanzada de los datos. |
-
+<br />
 # Proceso de Importación de Datos
 El proceso de importación implicó los siguientes pasos:
 
@@ -72,7 +99,7 @@ jq "{ "docs": .items }" "clash_royale_cards_1.json" | curl -X POST "http://admin
 
 que como resultado muestra ok si se creo de forma exitosa algun documento
 <img width="1457" height="127" alt="image" src="https://github.com/user-attachments/assets/3c7698ae-fde8-4d43-8c09-f02d003d0d3b" />
-
+<br />
 # Operaciones CRUD de CouchDB
 
 Como estamos manejando nuestra base de datos con fauxtoneste realiza las siguientes operaciones a través de la API REST usando solicitudes HTTP.
@@ -177,3 +204,22 @@ Los siguientes ejemplos que mostramos son de eliminaciones se hicieron desde fau
 
 <img width="483" height="146" alt="image" src="https://github.com/user-attachments/assets/766025fd-67f3-4a89-8327-4f501494eff0" />
 
+<br />
+
+# Referencias
+
+### **Datos y Dataset**
+* **Dataset de Cartas de Clash Royale:** [https://www.kaggle.com/datasets/niteshkakkar/clash-royal-cards-data/data](https://www.kaggle.com/datasets/niteshkakkar/clash-royal-cards-data/data)
+
+### **Herramientas de Línea de Comandos**
+* **`cURL` (Documentación Oficial):** [https://curl.se/docs/manpage.html](https://curl.se/docs/manpage.html)
+* **`jq` (Manual de Referencia):** [https://jqlang.org/manual/](https://jqlang.org/manual/)
+
+### **Apache CouchDB**
+* **CouchDB Fauxton (Interfaz Web):** [https://docs.couchdb.org/en/stable/fauxton/index.html](https://docs.couchdb.org/en/stable/fauxton/index.html)
+* **Guía de CouchDB (en español):** [https://guide.couchdb.org/editions/1/es/](https://guide.couchdb.org/editions/1/es/)
+* **Artículo - Aprovechando CouchDB con APIs RESTful:** [https://moldstud.com/articles/p-leveraging-couchdb-with-restful-apis-a-practical-guide-for-developers](https://moldstud.com/articles/p-leveraging-couchdb-with-restful-apis-a-practical-guide-for-developers)
+
+### **Plataformas y Despliegue (Railway)**
+* **Railway Documentation: Foundations (Guía Oficial):** [https://docs.railway.com/guides/foundations](https://docs.railway.com/guides/foundations)
+* **Guía de Railway: Despliegue automático de repositorios GitHub con base de datos integrada:** [https://sushihost.org/guia-de-railway-despliegue-automatico-de-repositorios-github-con-base-de-datos-integrada/](https://sushihost.org/guia-de-railway-despliegue-automatico-de-repositorios-github-con-base-de-datos-integrada/)
